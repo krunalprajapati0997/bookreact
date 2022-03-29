@@ -36,8 +36,8 @@ const Login = () => {
         console.log(item)
 
         axios.post("https://bookstorelibrary.herokuapp.com/login", item).then((res) => {
+            localStorage.setItem('token', res.data.token);
             if (res.data.success === true) {
-                localStorage.setItem('token', res.data.token);
                 window.location.reload(true)
                 // history.push('/User')
             }
@@ -151,7 +151,7 @@ const Login = () => {
                        
                         <br />
                         <Grid align='center'>
-                            <Button type='submit' class='btn btn-info' onClick={postData}><Link to='/User'>Login</Link> </Button>
+                            <Button type='submit' class='btn btn-info' onClick={postData}>Login </Button>
                             {/* <Stack spacing={2} sx={{ width: '100%' }}>
                                 <Button variant="outlined" onClick={handleClick}>
                                  

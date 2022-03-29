@@ -21,7 +21,7 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
+            <Link color="inherit" href="http://mui.com/">
                 Your Website
             </Link>{' '}
             {new Date().getFullYear()}
@@ -69,7 +69,7 @@ export default function SignUp() {
         FD.append("password",password)
         FD.append('profile_file', profile[0])
         console.log(FD)
-        axios.post('https://bookstorelibrary.herokuapp.com/book', FD)
+        axios.post(`https://bookstorelibrary.herokuapp.com/book`, FD)
             .then((res) => {
                 console.log('hey___sing in', res)
             })
