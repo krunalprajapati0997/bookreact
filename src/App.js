@@ -26,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         <Redirect
           from=''
           to={{
-            pathname: "/User"
+            pathname: "/"
           }}
           noThrow
         />
@@ -45,7 +45,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
         <Redirect
           from=''
           to={{
-            pathname: "/"
+            pathname: "/User"
           }}
           noThrow
         />
@@ -66,8 +66,8 @@ function App() {
 
 
           <PublicRoute path='/Register' component={Register} />
-          <PrivateRoute  path='/User' component={User} />
           <PublicRoute path='/forget' component={Forgot} />
+          <PrivateRoute path='/User' component={User} />
           <PrivateRoute path='/Table' component={Table} />
           {/* <PrivateRoute path="/Table" component={Table} /> */}
           <PrivateRoute path='/add' component={Add} />
