@@ -26,7 +26,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         <Redirect
           from=''
           to={{
-            pathname: "/"
+            pathname: "/User"
           }}
           noThrow
         />
@@ -45,7 +45,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
         <Redirect
           from=''
           to={{
-            pathname: "/User"
+            pathname: "/"
           }}
           noThrow
         />
