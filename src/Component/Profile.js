@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams,Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
+
 export default function Pp() {
     const { id } = useParams();
     let history = useHistory();
@@ -79,7 +80,7 @@ export default function Pp() {
                     <br />
                     <br />
 
-                    <Button  type='submit' onClick={postData}>Submit</Button>
+                    <Button  type='submit' onClick={postData}><Link to="/User">Submit</Link></Button>
                 </form>
             </div>
         </div>

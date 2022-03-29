@@ -71,7 +71,7 @@ function App() {
           {/* <PrivateRoute path="/Table" component={Table} /> */}
           <PrivateRoute path='/add' component={Add} />
           <PrivateRoute path='/e/:id' component={Edit} />
-          <PrivateRoute exact path='/User' component={User} />
+          <PrivateRoute  path='/User' component={User} />
           {/* <PublicRoute exact  path='/User' component={User}/> */}
           <PrivateRoute path='/Profile' component={Profile} />
           <PrivateRoute path='/Logout' component={Logout} />
