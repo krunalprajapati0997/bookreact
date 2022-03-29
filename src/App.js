@@ -66,12 +66,12 @@ function App() {
 
 
           <PublicRoute path='/Register' component={Register} />
+          <PrivateRoute  path='/User' component={User} />
           <PublicRoute path='/forget' component={Forgot} />
           <PrivateRoute path='/Table' component={Table} />
           {/* <PrivateRoute path="/Table" component={Table} /> */}
           <PrivateRoute path='/add' component={Add} />
           <PrivateRoute path='/e/:id' component={Edit} />
-          <PrivateRoute  path='/User' component={User} />
           {/* <PublicRoute exact  path='/User' component={User}/> */}
           <PrivateRoute path='/Profile' component={Profile} />
           <PrivateRoute path='/Logout' component={Logout} />
