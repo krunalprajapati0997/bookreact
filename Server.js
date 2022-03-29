@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const path = require("path")
-var PORT = process.env.PORT ||8000
+var PORT = process.env.PORT ||8046
 
 app.use(express.static(path.join(__dirname, 'build')));
 
