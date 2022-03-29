@@ -37,10 +37,10 @@ const Login = () => {
 
         axios.post("https://bookstorelibrary.herokuapp.com/login", item).then((res) => {
             localStorage.setItem('token', res.data.token);
-            window.location.reload(true)
-            // if (res.data.success === true) {
-            //     history.push('/User')
-            // }
+            // window.location.reload(true)
+            if (res.data.success === true) {
+                history.push('/User')
+            }
             // console.log("updare", res)
         })
     }
