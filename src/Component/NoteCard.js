@@ -5,19 +5,32 @@ import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Avatar from '@mui/material/Avatar';
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from '@mui/material/Checkbox'
+import axios from 'axios';
+import {useHistory} from 'react-router-dom'
 
-
-function NoteCard({ note, handleclick }) {
+function NoteCard({ note, handleclick,addToCart }) {
     const [checked, setChecked] = React.useState(false);
+
+    const [name, setname] = useState('');
+    const [description, setdescription] = useState('');
+    const [quantities, setquantities] = useState('');
+    const [price, setprice] = useState('');
+    const [profile, setprofile] = useState([]);
+   
+    let history = useHistory();
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
-    const handleButtonAddCart = e => {
-        e.preventDefault()
+
     
-    }
+    // const addToCart = (data) => {
+    //  localStorage.setItem('addtocart',JSON.stringify(data))
+    // //   JSON.parse(localStorage.getItem('addtocart',data))
+    //   history.push('/cart')
+    //  }
+    
     return (
         <div>
             <Card sx={{ maxWidth: 345 }}>
@@ -51,27 +64,19 @@ function NoteCard({ note, handleclick }) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="large"  >Know More</Button>
-                    <Checkbox
+                <Button onClick={() =>addToCart(note)}>Add to cart</Button>
+                    {/* <Checkbox
                         checked={checked}
                         onChange={handleChange}
                         inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                    {/* <Button fluid className='add-button' onClick={handleButtonAddCart}>
-                        Add to Cart
-                        <Icon name='arrow right' />
-                    </Button> */}
+                    /> */}
                 </CardActions>
 
             </Card>
 
+                 
         </div>
     )
 }
 
 export default NoteCard
-// {note.name}
-//         {note.description}
-//         {note.price}
-//         {note.quantities}
-//         {note.photo_path} 

@@ -12,11 +12,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import { IconButton, InputAdornment } from '@material-ui/core'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import GoogleLogin from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
+
+
+const clientId =
+    '909333294270-7rl7blhp6a051hdp7nfj95am8lc4ur1t.apps.googleusercontent.com';
 
 const Login = () => {
     const [email, setEmail] = useState('');
+    const [phone,setphone]= useState('');
     // const [password, setPassword] = useState('');
-    const [password,setpassword] = useState(false)
+    const [password, setpassword] = useState(false)
     const [errors, setErrors] = useState({});
     const [values, setValues] = useState({});
 
@@ -28,14 +35,14 @@ const Login = () => {
     const postData = (e) => {
         e.preventDefault()
         let item = {
-            // username: values.username,
+            // phone: values.phone,
             email: values.email,
             // phonenumber:values.phonenumber,
             password: values.password
         }
         console.log(item)
 
-        axios.post("https://bookstorelibrary.herokuapp.com/login", item).then((res) => {
+        axios.post("http://localhost:6544/login", item).then((res) => {
             localStorage.setItem('token', res.data.token);
             if (res.data.success === true) {
                 window.location.reload(true)
@@ -92,6 +99,14 @@ const Login = () => {
         setpassword(!password)
     }
 
+    function chandle() {
+        history.push('/otp')
+    }
+
+    function khandle() {
+        history.push('/')
+    }
+
     const handleChange = (event) => {
         //To stop default events    
         event.persist();
@@ -101,9 +116,33 @@ const Login = () => {
         validate(event, name, val);
         setValues({
             ...values,
-            [name]: val, [email]: val, [password]: val
+            [name]: val, [email]: val, [phone]:val, [password]: val
         })
     }
+
+    // const responseGoogle = (response) => {
+    //     console.log(response);
+    // }
+
+    const googleData = async googleData => {
+        let response = {
+            token: googleData.tokenId
+        }
+        axios.post("http://localhost:6544/google", response).then((res) => {
+            localStorage.setItem('token', res.data.token);
+            if (res.data.success === true) {
+                window.location.reload(true)
+                // history.push('/Table')
+            }
+            // console.log("updare", res)
+        })
+
+
+    }
+   
+
+
+
     const paperStyle = { padding: '30px 20px', width: 300, margin: '20px auto' }
     const marginTop = { marginTop: 5 }
 
@@ -122,36 +161,98 @@ const Login = () => {
                         <h2> Login Page</h2>
                     </Grid>
                     <form>
+                        <div>
+
+                            <h6>Loging With phone </h6>
+
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+
+                                    value={1}
+                                    checked
+                                    onClick={(e) => chandle(e.target.value)}
+                                />
+                                <label class="form-check-label" for="phone">Phone</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    value={2}
+                                    onClick={(e) => khandle(e.target.value)}
+                                />
+                                <label class="form-email-label" for="email">Email</label>
+                            </div>
+                        </div>
                         {/* <TextField name='username' fullWidth label='UserName' value={values.username} onChange={handleChange} error={Boolean(errors.username)} helperText={errors.username} /> */}
                         <TextField name='email' fullWidth label='Email' value={values.email} onChange={handleChange} error={Boolean(errors.email)} helperText={errors.email}
-                        
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position='end'>
 
-                                <MailOutlineIcon />
-                                </InputAdornment>
-                            )
-                        }}/>
-                        <TextField name='password' fullWidth label='Passwrord'  type={password ? 'text' : 'password'} value={values.password} onChange={handleChange} error={Boolean(errors.password)} helperText={errors.password}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position='end'>
-                                    <IconButton
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
 
-                                        onClick={handleonclick}
-                                        onMouseDown={handleonmousedown}
-                                    >
-                                        {password ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }} />
+                                        <MailOutlineIcon />
+                                    </InputAdornment>
+                                )
+                            }} />
+                        {/* <TextField name='phone' fullWidth label='Phone' value={values.phone} onChange={handleChange} error={Boolean(errors.phone)} helperText={errors.phone}
+
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+
+                                        <MailOutlineIcon />
+                                    </InputAdornment>
+                                )
+                            }} /> */}
+                        <TextField name='password' fullWidth label='Passwrord' type={password ? 'text' : 'password'} value={values.password} onChange={handleChange} error={Boolean(errors.password)} helperText={errors.password}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+                                        <IconButton
+
+                                            onClick={handleonclick}
+                                            onMouseDown={handleonmousedown}
+                                        >
+                                            {password ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }} />
                         <br />
-                       
+
                         <br />
                         <Grid align='center'>
+
+
                             <Button type='submit' class='btn btn-info' onClick={postData}>Login </Button>
+                            <br />
+                            <br />
+                            <div>
+                               
+                                <GoogleLogin
+                                    clientId="909333294270-7rl7blhp6a051hdp7nfj95am8lc4ur1t.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={googleData}
+                                    onFailure={googleData}
+                                    cookiePolicy={'single_host_origin'}
+                                    
+                                />
+                            </div>
+                            <div>
+                                {/* <GoogleLogout
+                                    clientId="909333294270-7rl7blhp6a051hdp7nfj95am8lc4ur1t.apps.googleusercontent.com"
+                                    buttonText="Logout"
+                                    onLogoutSuccess={logout}
+                                >
+                                </GoogleLogout> */}
+                            </div>
+
                             {/* <Stack spacing={2} sx={{ width: '100%' }}>
                                 <Button variant="outlined" onClick={handleClick}>
                                  
@@ -170,6 +271,7 @@ const Login = () => {
                             <br />
                             <br />
                             <Link to='/forget'>Forgate Password</Link>
+
                         </Grid>
                     </form>
                 </Paper>

@@ -26,10 +26,12 @@ function Register() {
     useEffect(() => {
         getuser()
     }, [])
+
     const getuser = () => {
         if (id === undefined || id === null) {
         } else {
-            axios.get(`https://bookstorelibrary.herokuapp.com/`).then((result) => {
+            
+            axios.get(`http://localhost:6544`).then((result) => {
                 console.log("result.data", result)
                 if (result.data.success === true) {
                     setUsername(result.data.user[0].username)
@@ -52,7 +54,7 @@ function Register() {
                 FD.append('profile_file',profile[0])
         
         let token = localStorage.getItem('token')
-        axios.post(`https://bookstorelibrary.herokuapp.com/`, FD,{ headers:{'x-access-token':token}}).then((res) => {
+        axios.post(`http://localhost:6544`, FD,{ headers:{'x-access-token':token}}).then((res) => {
         })
         history.push('/Table')
         setOpen(true);

@@ -69,7 +69,7 @@ export default function SignUp() {
         FD.append("password",password)
         FD.append('profile_file', profile[0])
         console.log(FD)
-        axios.post(`https://bookstorelibrary.herokuapp.com/book`, FD)
+        axios.post(`http://localhost:6544/book`, FD)
             .then((res) => {
                 console.log('hey___sing in', res)
             })

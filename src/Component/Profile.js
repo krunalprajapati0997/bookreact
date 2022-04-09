@@ -20,7 +20,7 @@ export default function Pp() {
     function data() {
         let token = localStorage.getItem("token");
 
-        axios.get(`https://bookstorelibrary.herokuapp.com/Abc`, { headers: { 'x-access-token': token } }).then((res) => {
+        axios.get(`http://localhost:6544/Abc`, { headers: { 'x-access-token': token } }).then((res) => {
             setName(res.data.data.username)
             setemail(res.data.data.email)
             setphonenumber(res.data.data.phone)
@@ -38,7 +38,7 @@ export default function Pp() {
         FD.append('phone',phonenumber)
         FD.append('profile_file', profile[0]);
         console.log("profile", profile);
-        axios.put(`https://bookstorelibrary.herokuapp.com/${id}`, FD,{ headers: { 'x-access-token': token } })
+        axios.put(`http://localhost:6544/${id}`, FD,{ headers: { 'x-access-token': token } })
         history.push('/User')
 
     }

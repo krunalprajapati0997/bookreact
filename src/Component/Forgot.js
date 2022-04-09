@@ -22,7 +22,7 @@ function Forgot() {
                 password:password
             }
             console.log(item)
-            axios.put(`https://bookstorelibrary.herokuapp.com/forget`,item).then((res) => {
+            axios.put(`http://localhost:6544/forget`,item).then((res) => {
             //    localStorage.setItem("token", res.data.token)
             //     if(res.data.success) {
             //     }

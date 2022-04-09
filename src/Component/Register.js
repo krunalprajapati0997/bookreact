@@ -82,7 +82,7 @@ function Register() {
         console.log(FD)
         //    let token = localStorage.getItem('token')
 
-        axios.post("https://bookstorelibrary.herokuapp.com/Add", FD).then((res) => {
+        axios.post("http://localhost:6544/Add", FD).then((res) => {
             history.push('/')
         })
         setOpen(true);

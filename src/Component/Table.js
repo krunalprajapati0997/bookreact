@@ -8,20 +8,28 @@ import { Grid, Paper } from '@material-ui/core';
 import NoteCard from './NoteCard';
 import { IconButton, InputAdornment } from '@material-ui/core'
 import Checkbox from '@mui/material/Checkbox';
-
 function Table() {
+
+  const [myArray, setMyArray] = useState([]);
   const { id } = useParams()
   let history = useHistory();
-
+  const items = JSON.parse(localStorage.getItem("addtocart"))
   const [user, setuser] = useState([])
 
   useEffect(() => {
+    
     data()
+    console.log(items)
+    if(items){
+      items.forEach(element =>{
+        myArray.push(element)
+      });
+    }
   }, [])
 
   function data() {
     // let token = localStorage.getItem('token')
-    axios.get(`https://bookstorelibrary.herokuapp.com/food`)
+    axios.get(`http://localhost:6544/food`)
       .then(res => {
         const tableData = res.data.data;
         setuser(tableData)
@@ -32,7 +40,7 @@ function Table() {
   function deleteuser(id) {
     // let token = localStorage.getItem('token')
     console.log(id);
-    axios.delete(`https://bookstorelibrary.herokuapp.com/food/${id}`)
+    axios.delete(`http://localhost:6544/food/${id}`)
       .then((result) => {
         console.log("result.data", result.data);
         data()
@@ -53,7 +61,15 @@ function Table() {
   }
 
   
+  const addcard = (data) => {
 
+    myArray.push(data);
+    console.log(myArray)
+    localStorage.setItem('addtocart',JSON.stringify(myArray))
+    history.push('/Cart')
+    }
+
+  
   
 
   // const columns = [
@@ -153,7 +169,7 @@ function Table() {
         <Grid container spacing={3}>
           {user.map(user => (
             <Grid item key={user.id} xs={12} md={6} lg={4}>
-              <NoteCard note={user} handleclick={deleteuser} /> 
+              <NoteCard note={user} handleclick={deleteuser} addToCart={addcard}/> 
             </Grid>
           ))}
         </Grid>
