@@ -63,14 +63,13 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 function App() {
   return (
     <div className="App">
+      hii from krunal
+      
       <Router>
        
         <Menu />
         <Switch>
-          {/* <Route exact path='/' component={Login}/> */}
           <PublicRoute exact path="/" component={Login} />
-
-
           <PublicRoute path='/Register' component={Register} />
           <PublicRoute path='/otp' component={Numberlogin} />
           <PublicRoute path='/otp1' component={KotpVerify} />
@@ -80,10 +79,8 @@ function App() {
           <PrivateRoute path='/User' component={User} />
           <PrivateRoute path='/Table' component={Table} />
           <PrivateRoute path='/pdf' component={Pdf} />
-          {/* <PrivateRoute path="/Table" component={Table} /> */}
           <PrivateRoute path='/add' component={Add} />
           <PrivateRoute path='/e/:id' component={Edit} />
-          {/* <PublicRoute exact  path='/User' component={User}/> */}
           <PrivateRoute path='/Profile' component={Profile} />
           <PrivateRoute path='/Logout' component={Logout} />
           <PrivateRoute path='/addbook' component={AddBook} />
