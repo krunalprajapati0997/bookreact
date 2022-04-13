@@ -8,6 +8,20 @@ import { Grid, Paper } from '@material-ui/core';
 import NoteCard from './NoteCard';
 import { IconButton, InputAdornment } from '@material-ui/core'
 import Checkbox from '@mui/material/Checkbox';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import TextField from "@mui/material/TextField";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
+
 function Table() {
 
   const [myArray, setMyArray] = useState([]);
@@ -101,10 +115,24 @@ function Table() {
   // ]
   return (
 
-    <div>
-      {/* <Navbar bg="light" expand={false}>
+    
+     
+      <div>
+      <Navbar bg="light" expand={false}>
         <Container fluid>
-          <Navbar.Brand href="#">Food Shop</Navbar.Brand>
+
+          <Navbar.Brand href="#">Book Shop</Navbar.Brand>
+
+          <IconButton aria-label="cart">
+            <a href='/Cart'>
+            <StyledBadge badgeContent={myArray.length} color="secondary">
+              <ShoppingCartIcon />
+            </StyledBadge>
+            </a>
+            
+          </IconButton>
+
+
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Offcanvas
             id="offcanvasNavbar"
@@ -115,68 +143,31 @@ function Table() {
               <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3"> */}
-      {/* <Figure>
-                    <Figure.Image
-                        width={171}
-                        height={180}
-                        alt="171x180"
-                        src="http://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
-                    />
-                    <Figure.Caption>
-                    </Figure.Caption>
-                </Figure> */}
-      {/* <Nav.Link href="/Table">food List</Nav.Link>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link href="/Table">Book List</Nav.Link>
                 <Nav.Link href="/User">User List</Nav.Link>
+                <Nav.Link href="/addbook">AddBook</Nav.Link>
                 <Nav.Link href="/Profile">My Profile</Nav.Link>
+                <Nav.Link href="/add">Add</Nav.Link>
                 <Nav.Link href="/Logout">Logout</Nav.Link>
-                 
+
               </Nav>
               <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
+                <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  fullWidth
+                  label="Search"
                 />
+
                 <Button variant="outline-success">Search</Button>
+
+
+
               </Form>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
-        </Container>
-      </Navbar> */}
-
-      {/* <MaterialTable title=" Material Table"
-                data={user}
-                columns={columns}
-
-                actions={[
-                    {
-                        
-                        icon: 'edit',
-                        tooltip: 'Edit User',
-                        // onClick: (event, rowData) => updateuser(rowData._id),
-                       
-                    },
-                    
-
-                    {
-                        icon: 'delete',
-                        tooltip: 'Delete User',
-                        // onClick: (event, rowData) => deleteuser(rowData._id)
-
-                    }, 
-                    {
-                        icon: 'add',
-                        tooltip: 'Add User',
-                        isFreeAction: true ,
-                        // onClick: (event, rowData) => adduser(rowData._id)
-                      }
-                ]}
-            /> */}
-            
-      
-      <Container>
+          <Container>
         <Grid container spacing={3}>
           {user.map(user => (
             <Grid item key={user.id} xs={12} md={6} lg={4}>
@@ -185,9 +176,11 @@ function Table() {
           ))}
         </Grid>
       </Container>
+        </Container>
+      </Navbar >
+    </div >
 
-
-    </div>
+  
   )
 }
 

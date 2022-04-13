@@ -63,11 +63,10 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 function App() {
   return (
     <div className="App">
-      hii from krunal
       
       <Router>
        
-        <Menu />
+        {/* <Menu /> */}
         <Switch>
           <PublicRoute exact path="/" component={Login} />
           <PublicRoute path='/Register' component={Register} />

@@ -29,8 +29,8 @@ function Menu(props) {
 
   const initialize = JSON.parse(localStorage.getItem("addtocart"))
   // const [count, setcount] = useState()
-  let history = useHistory()
-  const [myArray, setMyArray] = useState(initialize);
+  // let history = useHistory()
+  // const [myArray, setMyArray] = useState(initialize);
 
   
 
@@ -44,14 +44,14 @@ function Menu(props) {
 
           <Navbar.Brand href="#">Book Shop</Navbar.Brand>
 
-          <IconButton aria-label="cart">
+          {/* <IconButton aria-label="cart">
             <a href='/Cart'>
             <StyledBadge badgeContent={myArray.length} color="secondary">
               <ShoppingCartIcon />
             </StyledBadge>
             </a>
             
-          </IconButton>
+          </IconButton> */}
 
 
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
