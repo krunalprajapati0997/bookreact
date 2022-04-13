@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios'
 function Register() {
     const [open, setOpen] = useState(false);
-    const [username, setUsername] = useState('');
+    const [name, setname] = useState('');
     const [description, setdescription] = useState('');
     const [quantities, setquantities] = useState('');
     const [price, setprice] = useState('');
@@ -34,7 +34,7 @@ function Register() {
             axios.get(`http://localhost:6544`).then((result) => {
                 console.log("result.data", result)
                 if (result.data.success === true) {
-                    setUsername(result.data.user[0].username)
+                    setname(result.data.user[0].name)
                     setdescription(result.data.user[0].description)
                     setquantities(result.data.user[0].quantities)
                     setprice(result.data.user[0].price)
@@ -47,14 +47,14 @@ function Register() {
     }
     const handleClick = () => {
         let FD = new FormData();
-            FD.append('username', username);
+            FD.append('name', name);
             FD.append('description', description);
             FD.append('quantities', quantities);
             FD.append('price', price);
                 FD.append('profile_file',profile[0])
         
         let token = localStorage.getItem('token')
-        axios.post(`http://localhost:6544`, FD,{ headers:{'x-access-token':token}}).then((res) => {
+        axios.post(`http://localhost:6544/kru`, FD,{ headers:{'x-access-token':token}}).then((res) => {
         })
         history.push('/Table')
         setOpen(true);
@@ -74,10 +74,10 @@ function Register() {
           <Grid>
                 <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
-                        <h2> Add Book sItem</h2>
+                        <h2> Add New Books </h2>
                     </Grid>
                     <form>
-                        <TextField name='username' fullWidth label='Username'  value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <TextField name='name' fullWidth label='name'  value={name} onChange={(e) => setname(e.target.value)} />
                         <TextField name='description' fullWidth label='Description'  value={description} onChange={(e) => setdescription(e.target.value)} />
                         <TextField name='quantities' fullWidth label='Quantities'value={quantities} onChange={(e) => setquantities(e.target.value)}   />
                         <TextField name='price' fullWidth label='Price' value={price} onChange={(e) => setprice(e.target.value)}   />

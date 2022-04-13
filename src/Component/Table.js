@@ -15,6 +15,7 @@ function Table() {
   let history = useHistory();
   const items = JSON.parse(localStorage.getItem("addtocart"))
   const [user, setuser] = useState([])
+  const [count, setcount] = useState()
 
   useEffect(() => {
     
@@ -63,11 +64,19 @@ function Table() {
   
   const addcard = (data) => {
 
-    myArray.push(data);
-    console.log(myArray)
-    localStorage.setItem('addtocart',JSON.stringify(myArray))
-    history.push('/Cart')
+    if(myArray.filter(value =>value._id === data._id).length > 0){
+      alert('item is selected');
+    }else{
+      setTimeout(() => {
+        window.location.reload(false)
+          myArray.push(data);
+          console.log(myArray)
+          setcount(myArray.length)
+          localStorage.setItem('addtocart',JSON.stringify(myArray))
+          // history.push('/Cart')
+        }, 1);
     }
+   }
 
   
   
@@ -165,6 +174,8 @@ function Table() {
                       }
                 ]}
             /> */}
+            
+      
       <Container>
         <Grid container spacing={3}>
           {user.map(user => (

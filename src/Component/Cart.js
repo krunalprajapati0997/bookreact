@@ -9,52 +9,72 @@ import html2canvas from 'html2canvas';
 
 function Cart() {
 
+
+
     const initialize = JSON.parse(localStorage.getItem("addtocart"))
-
-    const [myArray, setMyArray] = useState(initialize);
-
     let history = useHistory
 
-    const Remove = (items) => {
+    const [myArray, setMyArray] = useState(initialize);
+    const [item, setitem] = useState(initialize)
 
-        localStorage.removeItem(`addtocart`);
+    const increment = (items_id) => {
+        setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities:parseInt(item.quantities) + 1 } : item))
+        // console.log("gfghh", myArray);
+    }
+
+    const decrement = (items_id) => {
+        setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities:parseInt(item.quantities) - 1 } : item))
+        // console.log("gfghh", myArray);
+    }
+
+    const Remove = (index) => {
         setTimeout(() => {
-            window.location.reload(true)
-            history.push('/Table')
-        }, 1000);
-        console.log("remove", items)
+            const list = [...item];
+            list.splice(index, 1);
+            setitem(list);
+            console.log(list, "sbdj")
+            localStorage.setItem('addtocart', JSON.stringify(list))
+            window.location.reload(false)
+            history.push('/Cart')
+        }, );
     }
 
 
-    const Prints = () => {
 
+    const print = () => {
+        
+    
         const divToDisplay = document.getElementById('div')
         html2canvas(divToDisplay,
-            {
-                useCORS: true,
-                onrendered: function (canvas) {
-                    divToDisplay.appendChild(canvas);
-                }
-            }).then(function (canvas) {
-                const divImage = canvas.toDataURL("image/png");
-                const pdf = new jsPDF();
-                pdf.addImage(divImage, 'PNG', 0, 0);
-                pdf.save("download.pdf");
-            })
-
-    }
-
-    const Print = () => {
-        window.print()
-    }
-
-
-
+          {
+            useCORS: true, 
+            onrendered: function (canvas) {
+              divToDisplay.appendChild(canvas);
+            }
+          }).then(function (canvas) {
+            const divImage = canvas.toDataURL("image/png");
+            const pdf = new jsPDF();
+            pdf.addImage(divImage, 'PNG', 0, 0);
+            pdf.save("download.pdf");
+          })
+      };
+    
+      function myFunction() {
+        let text = "Download your free Recipe !\nEither OK or Cancel.";
+        if (window.confirm(text) == true) {
+          text = print()
+        } else {
+          text = "You canceled!";
+        }
+      }
+    
 
 
     return (
 
-        <div id='div'>
+       <div>
+            <div id='div'>
+
             <table class="table table-bordered">
 
                 <thead>
@@ -67,10 +87,10 @@ function Cart() {
                     </tr>
                 </thead>
                 {
-                    myArray.map((items) => {
+                    myArray.map((items, i) => {
                         return (
                             <tbody>
-                                <tr>
+                                <tr key={i}>
                                     <td>
                                         {items.name}
                                     </td>
@@ -81,30 +101,31 @@ function Cart() {
                                         {items.quantities}
                                     </td>
                                     <td>
-                                        {items.price}
+                                        {items.quantities * items.price}
                                     </td>
                                     <td>
                                         <img src={items.profile_url} width='120' height='100' />
                                     </td>
                                     <td>
-                                        <Button onClick={() => Remove()}>Remove From Item</Button>
+                                        <Button onClick={() => Remove(i)}>Remove Item</Button>
                                     </td>
                                     <td>
-                                        <Button onClick={Prints}>print</Button>
+                                        <Button onClick={myFunction}>print</Button>
                                     </td>
                                     <td>
+                                        <Button onClick={() => increment(items._id)}>+</Button>
+                                        <p> {items.quantities}</p>
+                                        <Button onClick={() => decrement(items._id)}>-</Button>
+                                    </td>
 
-                                        <Button onClick={Print}>JS Print</Button>
-                                    </td>
                                 </tr>
                             </tbody>
                         )
                     })
                 }
             </table>
-
-
-        </div>
+            </div>
+       </div>
 
 
 

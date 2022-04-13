@@ -14,6 +14,7 @@ export default function Pp() {
     const [profile, setProfile] = useState([]);
     useEffect(() => {
         data()
+        Data()
     }, [])
 
 
@@ -29,6 +30,18 @@ export default function Pp() {
         })
     }
 
+    function Data() {
+        let token = localStorage.getItem("token");
+
+        axios.get(`http://localhost:6544/googelwith`, { headers: { 'x-access-token': token } }).then((res) => {
+            setName(res.data.data[0].username)
+            setemail(res.data.data[0].email)
+            // setphonenumber(res.data.data[0].phone)
+            setProfile(res.data.data[0].profile_file)
+            console.log("Google", res)
+        })
+    }
+
     const postData = () => {
         let token = localStorage.getItem("token");
 
@@ -40,8 +53,10 @@ export default function Pp() {
         console.log("profile", profile);
         axios.put(`http://localhost:6544/${id}`, FD,{ headers: { 'x-access-token': token } })
         history.push('/User')
-
+        
     }
+
+
 
     return (
         <div>
@@ -50,6 +65,7 @@ export default function Pp() {
             <img src={profile} alt='' height='100' width='100'></img>
                 <form>
                     {data}
+                    {Data}
                     <div>
                         <TextField value={name}
                             onChange={(e) => setName(e.target.value)}
