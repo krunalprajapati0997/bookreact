@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory, useParams,Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
+import Swal from 'sweetalert2';  
 
 export default function Pp() {
     const { id } = useParams();
@@ -31,6 +32,8 @@ export default function Pp() {
     }
 
     function Data() {
+        
+       
         let token = localStorage.getItem("token");
 
         axios.get(`http://localhost:6544/googelwith`, { headers: { 'x-access-token': token } }).then((res) => {
@@ -43,18 +46,20 @@ export default function Pp() {
     }
 
     const postData = () => {
-        let token = localStorage.getItem("token");
 
-        let FD = new FormData();
-        FD.append('username', name);
-        FD.append('email',email)
-        FD.append('phone',phonenumber)
-        FD.append('profile_file', profile[0]);
-        console.log("profile", profile);
-        axios.put(`http://localhost:6544/${id}`, FD,{ headers: { 'x-access-token': token } })
-        history.push('/User')
-        
-    }
+            let token = localStorage.getItem("token");
+            
+            let FD = new FormData();
+            FD.append('username', name);
+            FD.append('email',email)
+            FD.append('phone',phonenumber)
+            FD.append('profile_file', profile[0]);
+            console.log("profile", profile);
+            axios.put(`http://localhost:6544/${id}`, FD,{ headers: { 'x-access-token': token } })
+            history.push('/User')
+            
+        }
+    
 
 
 
@@ -82,22 +87,25 @@ export default function Pp() {
                         />
                     </div>
                     <br />
-                    <div>
+                    {/* <div>
                         <TextField value={phonenumber} 
                         onChange={(e) => setphonenumber(e.target.value)} 
                         variant='standard'
                         label='Mobilenumber'
                         />
-                    </div>
+                    </div> */}
                     <br />
                    
-                   <input placeholder='profile' type='file' name='profil_url' onChange={(e) => setProfile(e.target.files)} />
+                   {/* <input placeholder='profile' type='file' name='profil_url' onChange={(e) => setProfile(e.target.files)} /> */}
                    
                     <br />
                     <br />
 
-                    <Button  type='submit' onClick={postData}><Link to="/User">Submit</Link></Button>
+                    {/* <Button variant="info" className='mx-3' type='submit' onClick={postData}><Link to="/User">Submit</Link></Button> */}
+                    <Button variant="info" type='submit' ><Link to="/Table">Return</Link></Button>
                 </form>
+
+
             </div>
         </div>
     )

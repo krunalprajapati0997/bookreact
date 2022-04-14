@@ -87,6 +87,8 @@
 // export default Copy
 
 import SimpleImageSlider from "react-simple-image-slider";
+import {Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 const images = [
 
@@ -109,6 +111,7 @@ const User = () => {
         showNavs={true}
         autoPlay={1.2}
       />
+      <Button type='button' variant="info"><Link to='/Table'>Return</Link></Button>
     </div>
   );
 }

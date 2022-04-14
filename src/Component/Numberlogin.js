@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React,{ useState,useEffect } from 'react'
 import {useHistory,useParams} from 'react-router-dom'
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { IconButton, InputAdornment,TextField } from '@material-ui/core'
 
 function Otp() {
     
@@ -13,6 +16,14 @@ function Otp() {
     useEffect(() => {
         localStorage.removeItem("token");
     }, [])
+
+
+    const handleonclick = () => {
+      setpassword(!password)
+  }
+  const handleonmousedown = () => {
+      setpassword(!password)
+  } 
 
     const postData = (e) => {
       e.preventDefault()
@@ -69,7 +80,21 @@ function Otp() {
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" name='password' value={password} onChange={(e)=>setpassword(e.target.value)}/>
+                  
+                     <input type="password" id="form2Example27" class="form-control form-control-lg" name='password' value={password} onChange={(e)=>setpassword(e.target.value)} 
+                     InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+                                        <IconButton
+
+                                            onClick={handleonclick}
+                                            onMouseDown={handleonmousedown}
+                                        >
+                                            {password ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}/>
                     <label class="form-label" for="form2Example27">Password</label>
                   </div>
 

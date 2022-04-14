@@ -148,7 +148,7 @@ function Table() {
                 <Nav.Link href="/User">User List</Nav.Link>
                 <Nav.Link href="/addbook">AddBook</Nav.Link>
                 <Nav.Link href="/Profile">My Profile</Nav.Link>
-                <Nav.Link href="/add">Add</Nav.Link>
+                {/* <Nav.Link href="/add">Add</Nav.Link> */}
                 <Nav.Link href="/Logout">Logout</Nav.Link>
 
               </Nav>

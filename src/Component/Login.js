@@ -14,7 +14,7 @@ import { IconButton, InputAdornment } from '@material-ui/core'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import GoogleLogin from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
-
+import Swal from 'sweetalert2'
 
 const clientId =
     '909333294270-7rl7blhp6a051hdp7nfj95am8lc4ur1t.apps.googleusercontent.com';
@@ -26,32 +26,52 @@ const Login = () => {
     const [password, setpassword] = useState(false)
     const [errors, setErrors] = useState({});
     const [values, setValues] = useState({});
+    
 
     const { id } = useParams()
     let history = useHistory();
     useEffect(() => {
         localStorage.removeItem("token");
     }, [])
+
     const postData = (e) => {
         e.preventDefault()
-        let item = {
-            // phone: values.phone,
-            email: values.email,
-            // phonenumber:values.phonenumber,
-            password: values.password
-        }
-        console.log(item)
 
-        axios.post("http://localhost:6544/login", item).then((res) => {
-            localStorage.setItem('token', res.data.token);
-            if (res.data.success === true) {
-                window.location.reload(true)
-                // history.push('/User')
+        if(values.email === undefined || values.password === undefined ){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Please Enter Email And Password</a>'
+              })
+        }else{
+
+            let item = {
+                email: values.email,
+                password: values.password
             }
-            // console.log("updare", res)
-        })
+            console.log(item)
+            
+            axios.post("http://localhost:6544/login", item).then((res) => {
+                localStorage.setItem('token', res.data.token);
+                if (res.data.success === true) {
+                    
+                    Swal.fire(
+                        'Login Succesfully',
+                        'You clicked the button!',
+                        'success'
+                        ) 
+                        setTimeout(() => {
+                        window.location.reload(true)
+                           
+                          }, 2000);
+                        // history.push('/User')
+                    }
+                    // console.log("updare", res)
+                })
+            }
     }
-
+            
 
     const validate = (event, name, value) => {
         //A function to validate each input values
