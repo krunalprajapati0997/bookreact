@@ -44,7 +44,7 @@ function Table() {
 
   function data() {
     // let token = localStorage.getItem('token')
-    axios.get(`http://localhost:6544/food`)
+    axios.get(`https://bookstorelibrary.herokuapp.com/food`)
       .then(res => {
         const tableData = res.data.data;
         setuser(tableData)
@@ -55,7 +55,7 @@ function Table() {
   function deleteuser(id) {
     // let token = localStorage.getItem('token')
     console.log(id);
-    axios.delete(`http://localhost:6544/food/${id}`)
+    axios.delete(`https://bookstorelibrary.herokuapp.com/food/${id}`)
       .then((result) => {
         console.log("result.data", result.data);
         data()

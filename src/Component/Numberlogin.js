@@ -43,7 +43,7 @@ function Otp() {
       }
       console.log(item)
 
-      axios.post("http://localhost:6544/otp", item).then((res) => {
+      axios.post("https://bookstorelibrary.herokuapp.com/otp", item).then((res) => {
           localStorage.setItem('phone', phone);
            if (res.data.success === true) {
                     

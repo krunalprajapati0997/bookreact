@@ -29,7 +29,7 @@ function Edit() {
     const getuser = () => {
         if (id === undefined || id === null) {
         } else {
-            axios.get(`http://localhost:6544/`).then((result) => {
+            axios.get(`https://bookstorelibrary.herokuapp.com/`).then((result) => {
                 console.log("result.data", result)
                 if (result.data.success === true) {
                     setUsername(result.data.user[0].username)
@@ -60,7 +60,7 @@ function Edit() {
         //     profile_url:profile
         // }
         // console.log(item)
-        axios.put(`http://localhost:6544/e/${id}`, FD).then((res) => {
+        axios.put(`https://bookstorelibrary.herokuapp.com/e/${id}`, FD).then((res) => {
         })
         history.push('/Table')
         setOpen(true);
