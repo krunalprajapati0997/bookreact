@@ -4,6 +4,7 @@ import {useHistory,useParams} from 'react-router-dom'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { IconButton, InputAdornment,TextField } from '@material-ui/core'
+import Swal from 'sweetalert2'
 
 function Otp() {
     
@@ -27,25 +28,44 @@ function Otp() {
 
     const postData = (e) => {
       e.preventDefault()
+      if(phone === '' ||password === ''){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Please Enter Phone Number And Password</a>'
+          })
+    }else{
       let item = {
         
-          // username: values.username,
-          phone: phone,
-          // phonenumber:values.phonenumber,
+         phone: phone,
           password: password
       }
       console.log(item)
 
       axios.post("http://localhost:6544/otp", item).then((res) => {
           localStorage.setItem('phone', phone);
-          // localStorage.setItem('password',password)
-          // if (res.data.success === true) {
-              // window.location.reload(true)
-          //   }
-            history.push('/otp1')
-          // console.log("updare", res)
-      })
+           if (res.data.success === true) {
+                    
+                    Swal.fire(
+                        'Login Succesfully',
+                        'Otp Send Your Mobile',
+                        'success'
+                        ) 
+                        setTimeout(() => {
+                        // window.location.reload(true)
+                        history.push('/otp1')
+                           
+                          }, 2000);
+                    }
+                    // console.log("updare", res)
+                })
+          
+         
+            // history.push('/otp1')
+          
   }
+}
    
   return (
     <div>
@@ -57,7 +77,7 @@ function Otp() {
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
                 alt="login form"
                 class="img-fluid" style={{borderradius: "1rem 0 0 1rem"}}
               />
@@ -80,7 +100,20 @@ function Otp() {
                   </div>
 
                   <div class="form-outline mb-4">
-                  
+                  {/* <TextField name='password'id="form2Example27" class="form-control form-control-lg" fullWidth label='Passwrord' variant='outlined' type='password'  value={password}  onChange={(e)=>setpassword(e.target.value)} 
+                                                    InputProps={{
+                                                        endAdornment: (
+                                                            <InputAdornment position='end'>
+                                                                <IconButton
+
+                                                                    onClick={handleonclick}
+                                                                    onMouseDown={handleonmousedown}
+                                                                >
+                                                                    {password ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }} /> */}
                      <input type="password" id="form2Example27" class="form-control form-control-lg" name='password' value={password} onChange={(e)=>setpassword(e.target.value)} 
                      InputProps={{
                                 endAdornment: (

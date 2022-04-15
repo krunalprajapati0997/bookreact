@@ -20,13 +20,23 @@ function Cart() {
     const itemsPrice = myArray.reduce((a, c) => a + c.quantities * c.price, 0);
     const totalPrice = itemsPrice
 
-    const increment = (items_id) => {
-        setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities: parseInt(item.quantities) + 1 } : item))
+    const increment = (items_id,quantities) => {
+        if(quantities >=0){
+
+            setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities: parseInt(item.quantities) + 1 } : item))
+        }else{
+            return false
+        }
         // console.log("gfghh", myArray);
     }
 
-    const decrement = (items_id) => {
-        setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities: parseInt(item.quantities) - 1 } : item))
+    const decrement = (items_id,quantities) => {
+        if(quantities <= 1){
+            return false
+        }else{
+
+            setMyArray(myArray => myArray.map((item) => items_id === item._id ? { ...item, quantities: parseInt(item.quantities) - 1 } : item))
+        }
         // console.log("gfghh", myArray);
     }
 
@@ -117,9 +127,9 @@ function Cart() {
                                             <Button onClick={myFunction}>print</Button>
                                         </td>
                                         <td>
-                                            <Button onClick={() => increment(items._id)}>+</Button>
+                                            <Button onClick={() => increment(items._id , items.quantities)}>+</Button>
                                             <p> {items.quantities}</p>
-                                            <Button onClick={() => decrement(items._id)}>-</Button>
+                                            <Button onClick={() => decrement(items._id , items.quantities)}>-</Button>
                                         </td>
 
 

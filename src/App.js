@@ -78,7 +78,7 @@ function App() {
           <PrivateRoute path='/User' component={User} />
           <PrivateRoute path='/Table' component={Table} />
           <PrivateRoute path='/pdf' component={Pdf} />
-          {/* <PrivateRoute path='/add' component={Add} /> */}
+          <PublicRoute path='/L' component={L} />
           <PrivateRoute path='/e/:id' component={Edit} />
           <PrivateRoute path='/Profile' component={Profile} />
           <PrivateRoute path='/Logout' component={Logout} />

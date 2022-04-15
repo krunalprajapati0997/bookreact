@@ -81,14 +81,14 @@ function Table() {
     if(myArray.filter(value =>value._id === data._id).length > 0){
       alert('item is selected');
     }else{
-      setTimeout(() => {
-        window.location.reload(false)
-          myArray.push(data);
+      // setTimeout(() => {
+        // window.location.reload(false)
+          myArray.push(data); 
           console.log(myArray)
           setcount(myArray.length)
           localStorage.setItem('addtocart',JSON.stringify(myArray))
           // history.push('/Cart')
-        }, 1);
+        // }, 1);
     }
    }
 
