@@ -17,7 +17,7 @@ import { GoogleLogout } from 'react-google-login';
 import Swal from 'sweetalert2'
 
 const clientId =
-    '909333294270-t81q76b5bcsp3ccgjesdo18215akkre8.apps.googleusercontent.com';
+    '809959443052-aa0025rlrgu0iu8b7decqau2diblrdfn.apps.googleusercontent.com';
 
 const Login = () => {
     const [email, setEmail] = useState('');
