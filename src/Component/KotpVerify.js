@@ -58,7 +58,7 @@ function App() {
     }
     console.log(item)
     
-    axios.post("https://bookstorelibrary.herokuapp.com/verify", item).then((res) => {
+    axios.post("http://localhost:6544/verify", item).then((res) => {
       console.log("updare", res)
       if (res.data.success === true) {
         localStorage.setItem('token', res.data.token);
@@ -77,7 +77,7 @@ function App() {
     }
     console.log("hey item",item)
 
-    axios.post('https://bookstorelibrary.herokuapp.com/resend',item).then((res)=>{
+    axios.post('http://localhost:6544/resend',item).then((res)=>{
       console.log('heyyyy',res)
       if(res.data.success === true){
         localStorage.setItem('token',res.data.token)

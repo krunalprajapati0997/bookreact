@@ -54,7 +54,7 @@ function Register() {
                 FD.append('profile_file',profile[0])
         
         let token = localStorage.getItem('token')
-        axios.post(`https://bookstorelibrary.herokuapp.com/kru`, FD,{ headers:{'x-access-token':token}}).then((res) => {
+        axios.post(`http://localhost:6544/kru`, FD,{ headers:{'x-access-token':token}}).then((res) => {
         })
         history.push('/Table')
         setOpen(true);

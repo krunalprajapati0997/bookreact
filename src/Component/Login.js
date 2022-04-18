@@ -52,7 +52,7 @@ const Login = () => {
             }
             console.log(item)
             
-            axios.post("https://bookstorelibrary.herokuapp.com/login", item).then((res) => {
+            axios.post("http://localhost:6544/login", item).then((res) => {
                 localStorage.setItem('token', res.data.token);
                 if (res.data.success === true) {
                     
@@ -148,7 +148,7 @@ const Login = () => {
         let response = {
             token: googleData.tokenId
         }
-        axios.post("https://bookstorelibrary.herokuapp.com/google", response).then((res) => {
+        axios.post("http://localhost:6544/google", response).then((res) => {
             localStorage.setItem('token', res.data.token);
             if (res.data.success === true) {
                 window.location.reload(true)
